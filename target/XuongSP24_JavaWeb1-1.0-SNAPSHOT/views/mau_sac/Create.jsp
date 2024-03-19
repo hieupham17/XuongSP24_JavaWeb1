@@ -11,22 +11,23 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/mau-sac/create" method="post">
-    <div class="form-group">
-        <label>ID</label>
-        <input name="id" type="text" placeholder="Nhập id">
-    </div>
-    <div class="form-group">
+<form action="/mau-sac/store" method="POST">
+    <div>
         <label>Mã màu</label>
-        <input name="ma" type="text" placeholder="Nhập mã màu">
+        <input name="ma" type="text">
     </div>
-    </div>
-    <div class="form-group">
+
+    <div>
         <label>Tên</label>
-        <input name="ten" type="text" placeholder="Nhập tên">
-    </div><div class="form-group">
+        <input name="ten" type="text">
+    </div>
+
+    <div>
         <label>Trạng thái</label>
-        <input name="trangThai" type="text" placeholder="Nhập tên">
+        <input type="radio" name="trangThai" value="1"/>
+        <label>Đang hoạt động</label>
+        <input type="radio" name="trangThai" value="0"/>
+        <label>Ngừng hoạt động</label>
     </div>
     <button>Thêm</button>
 </form>

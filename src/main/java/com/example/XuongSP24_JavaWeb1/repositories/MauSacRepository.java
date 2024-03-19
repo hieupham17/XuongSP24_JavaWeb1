@@ -1,7 +1,12 @@
 package com.example.XuongSP24_JavaWeb1.repositories;
 
 import com.example.XuongSP24_JavaWeb1.entities.MauSac;
+import com.example.XuongSP24_JavaWeb1.utils.DBConnect;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +15,42 @@ import java.util.List;
 */
 public class MauSacRepository {
     private List<MauSac> list;
+    private Connection connection;
 
+    //Hàm khởi tạo
     public MauSacRepository() {
-        this.list = new ArrayList<>();
-        this.list.add(new MauSac(1, "fff", "white", 1));
-        this.list.add(new MauSac(2, "000", "black", 0));
-        this.list.add(new MauSac(4, "070707", "pink", 1));
+
+        try {
+            this.connection = DBConnect.getConnection();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<MauSac> findAll() {
+        String sql = "SELECT * FROM MauSac";
+        ArrayList<MauSac> ds = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //MauSac mauSac = new MauSac();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String ten = rs.getString("Ten");
+                String ma = rs.getString("Ma");
+                int trangThai = rs.getInt("TrangThai");
+                MauSac ms = new MauSac(id, ma, ten, trangThai);
+                ds.add(ms);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ds;
+
+
     }
 
     public List<MauSac> getList() {
@@ -28,7 +63,18 @@ public class MauSacRepository {
 
     //  add
     public void insert(MauSac mauSac) {
-        this.list.add(mauSac);
+        //this.list.add(mauSac);
+        String sql = "INSERT INTO MauSac(Ma, Ten, TrangThai) VALUES (?, ? ,?)";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setString(1, mauSac.getMa() );
+            ps.setString(2, mauSac.getTen() );
+            ps.setInt(3, mauSac.getTrangThai() );
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // update
@@ -43,24 +89,41 @@ public class MauSacRepository {
     }
 
     //delete
-    public void delete(MauSac mauSac) {
-        for (int i = 0; i < this.list.size(); i++) {
-            MauSac item = this.list.get(i);
-            if (item.getId() == mauSac.getId()) {
-                this.list.remove(i);
-                return;
-            }
+    public void delete(MauSac ms) {
+//        for (int i = 0; i < this.list.size(); i++) {
+//            MauSac item = this.list.get(i);
+//            if (item.getId() == mauSac.getId()) {
+//                this.list.remove(i);
+//                return;
+//            }
+//        }
+        String sql = "DELETE FROM MauSac WHERE Id = ?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setInt(1, ms.getId());
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public MauSac getOne(int id) {
-        for (int i = 0; i < this.list.size(); i++) {
-            MauSac mauSac = this.list.get(i);
-            if (mauSac.getId() == id) {
-                return mauSac;
-
+    public MauSac findById(int id) {
+        String sql = "SELECT * FROM MauSac WHERE id = ?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) { // Kiểm tra xem có dữ liệu trong ResultSet hay không
+                String ten = rs.getString("Ten");
+                String ma = rs.getString("Ma");
+                int trangThai = rs.getInt("TrangThai");
+                return new MauSac(id, ma, ten, trangThai);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
+
+
 }

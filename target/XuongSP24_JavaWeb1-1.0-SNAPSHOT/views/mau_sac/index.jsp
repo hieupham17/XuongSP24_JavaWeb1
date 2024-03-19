@@ -13,7 +13,7 @@
     <title>Title</title>
 </head>
 <body>
-<button> <a href="/views/mau_sac/Create.jsp">Thêm mới</a> </button>
+<a href="/mau-sac/create">Thêm mới</a>
 
 
 

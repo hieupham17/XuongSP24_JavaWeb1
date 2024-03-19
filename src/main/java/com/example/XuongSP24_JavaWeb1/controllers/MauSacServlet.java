@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 /*
@@ -25,6 +24,7 @@ import java.util.List;
 })
 public class MauSacServlet extends HttpServlet {
     private MauSacRepository msRepo;
+
 
 
     public MauSacServlet() {
@@ -48,74 +48,76 @@ public class MauSacServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if (uri.contains("store")) {
-            this.create(request, response);
+            this.store(request, response);
         } else if (uri.contains("update")) {
             this.update(request, response);
-        } else {
-            //
         }
     }
 
     public void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<MauSac> listMS = this.msRepo.getList();
+        //List<MauSac> listMS = this.msRepo.getList();
+       List<MauSac> listMS  = msRepo.findAll();
         request.setAttribute("data", listMS);
         request.getRequestDispatcher("/views/mau_sac/index.jsp").forward(request, response);
     }
+
     public void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/views/mau_sac/Create.jsp").forward(request, response);
 
-        // Get parameters from the request
-        String idStr = request.getParameter("id");
-        Integer id = null;
-        if (idStr != null && !idStr.isEmpty()) {
-            id = Integer.parseInt(idStr);
-        }
-
-
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String trangThaiString = request.getParameter("trangThai");
-        Integer trangThai = Integer.parseInt(trangThaiString);
-
-        // Create a MauSac object
-        MauSac mauSac = new MauSac(id, ma, ten, trangThai);
-        this.msRepo.insert(mauSac);
-        // Set the MauSac object as an attribute in the request
-        request.setAttribute("data", mauSac);
-
-        // Forward the request to the JSP page
-       // request.getRequestDispatcher("/views/mau_sac/create.jsp").forward(request, response);
-        response.sendRedirect("/mau-sac/index");
     }
 
 
     public void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idString = request.getParameter("id");
-        int id = Integer.parseInt(idString);
-        MauSac mauSac = this.msRepo.getOne(id);
-        if (mauSac != null) {
-
-            request.setAttribute("data", mauSac);
-            request.getRequestDispatcher("/views/mau_sac/edit.jsp").forward(request, response);
-        } else {
+        try {
+            String idString = request.getParameter("id");
+            if (idString != null && !idString.isEmpty()) { // Kiểm tra xem idString không null và không rỗng
+                int id = Integer.parseInt(idString);
+                MauSac mauSac = this.msRepo.findById(id);
+                if (mauSac != null) {
+                    request.setAttribute("data", mauSac);
+                    request.getRequestDispatcher("/views/mau_sac/edit.jsp").forward(request, response);
+                    return;
+                }
+            }
             response.sendRedirect("/mau-sac/index");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            response.sendRedirect("/error-page");
+        } catch (Exception e) {
+            e.printStackTrace();
+           response.sendRedirect("/error-page");
         }
     }
+
 
     public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String idString = request.getParameter("id");
         int id = Integer.parseInt(idString);
-        MauSac ms = this.msRepo.getOne(id);
+
+        MauSac ms = this.msRepo.findById(id);
         if (ms != null) {
             this.msRepo.delete(ms);
         }
         response.sendRedirect("/mau-sac/index");
     }
 
-    public void store(HttpServletRequest request, HttpServletResponse response) {
-
+    public void store(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        int trangThai = Integer.parseInt(request.getParameter("trangThai"));
+       // MauSac ms = new MauSac(ma, ten, trangThai);
+       MauSac ms1 = new MauSac(999, ma, ten, trangThai);
+        this.msRepo.insert(ms1);
+        response.sendRedirect("/mau-sac/index");
     }
 
-    public void update(HttpServletRequest request, HttpServletResponse response) {
-
+    public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        int trangThai = Integer.parseInt(request.getParameter("trangThai"));
+        MauSac ms = new MauSac(id, ma, ten, trangThai);
+        this.msRepo.update(ms);
+        response.sendRedirect("/mau-sac/index");
     }
 }
