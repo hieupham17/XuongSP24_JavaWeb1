@@ -67,9 +67,9 @@ public class MauSacRepository {
         String sql = "INSERT INTO MauSac(Ma, Ten, TrangThai) VALUES (?, ? ,?)";
         try {
             PreparedStatement ps = this.connection.prepareStatement(sql);
-            ps.setString(1, mauSac.getMa() );
-            ps.setString(2, mauSac.getTen() );
-            ps.setInt(3, mauSac.getTrangThai() );
+            ps.setString(1, mauSac.getMa());
+            ps.setString(2, mauSac.getTen());
+            ps.setInt(3, mauSac.getTrangThai());
             ps.executeUpdate();
 
         } catch (Exception e) {
@@ -78,14 +78,29 @@ public class MauSacRepository {
     }
 
     // update
-    public void update(MauSac mauSac) {
-        for (int i = 0; i < this.list.size(); i++) {
-            MauSac item = this.list.get(i);
-            if (item.getId() == mauSac.getId()) {
-                this.list.set(i, mauSac);
-                return;
-            }
+//    public void update(MauSac mauSac) {
+//        for (int i = 0; i < this.list.size(); i++) {
+//            MauSac item = this.list.get(i);
+//            if (item.getId() == mauSac.getId()) {
+//                this.list.set(i, mauSac);
+//                return;
+//            }
+//        }
+//
+//    }
+    public void update(MauSac ms) {
+        String sql = "UPDATE MauSac SET Ma = ?, Ten = ?, TrangThai = ? WHERE id = ?";
+        try (Connection connection = DBConnect.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, ms.getMa());
+            statement.setString(2, ms.getTen());
+            statement.setInt(3, ms.getTrangThai());
+            statement.setInt(4, ms.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     //delete
