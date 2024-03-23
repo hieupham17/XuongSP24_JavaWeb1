@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /*
     @author: admin Date: 012/12/03/2024 Time: 13:08
@@ -49,8 +50,6 @@ public class MauSacRepository {
             e.printStackTrace();
         }
         return ds;
-
-
     }
 
     //  add
@@ -195,5 +194,48 @@ public class MauSacRepository {
             e.printStackTrace();
         }
         return ds;
+    }
+
+    public List<MauSac> paging(Optional<Integer> optionalPage , Optional<Integer> optionalLimit) {
+        int limit = optionalLimit.isPresent() ? optionalLimit.get() : 5 ;
+        int page = optionalPage.isPresent() ? optionalPage.get() : 1 ;
+        ArrayList<MauSac> ds = new ArrayList<>();
+        String sql = "SELECT * FROM MauSac ORDER BY Id OFFSET ? ROWS FETCH  NEXT ? ROWS ONLY ";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            int offset  = (page -1) * limit;
+            ps.setInt(1, offset);
+            ps.setInt(2, limit);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            //MauSac mauSac = new MauSac();
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String ten = rs.getString("Ten");
+                String ma = rs.getString("Ma");
+                int trangThai = rs.getInt("TrangThai");
+                MauSac ms = new MauSac(id, ma, ten, trangThai);
+                ds.add(ms);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ds;
+    }
+    public int count()
+    {
+        String sql = "SELECT COUNT(ID) AS Total FROM MauSac";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            rs.next();
+            int total = rs.getInt("Total");
+            return total;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }

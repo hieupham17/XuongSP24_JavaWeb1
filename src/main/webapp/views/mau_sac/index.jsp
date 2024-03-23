@@ -10,42 +10,45 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
     <title>Title</title>
 </head>
 <body>
 <div class="container-sm">
-
-        <form action="/mau-sac/index" method="GET">
-            <div class="row mt-2">
-                <div class="col-6">
-                    <label>Mã</label>
-                    <input type="text" name="ma" class="form-control" value="${ma}"/>
-                </div>
-                <div class="col-6">
-                    <label>Tên</label>
-                    <input type="text" name="ten" class="form-control" value="${ten}"/>
+    <%--tìm kiếm , filter--%>
+    <form action="/mau-sac/index" method="GET">
+        <div class="row mt-2">
+            <div class="col-6">
+                <label>Mã</label>
+                <input type="text" name="ma" class="form-control" value="${ma}"/>
+            </div>
+            <div class="col-6">
+                <label>Tên</label>
+                <input type="text" name="ten" class="form-control" value="${ten}"/>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <label>Trạng thái</label>
+                <div class="col-12">
+                    <input type="radio" name="trangThai" class="form-check-inline" value="1"
+                    ${trangThai == 1 ? "checked" : ""}/>
+                    <label>Đang hoạt động</label>
+                    <input type="radio" name="trangThai" class="form-check-inline" value="0"
+                    ${trangThai == 0 ? "checked" : ""}/>
+                    <label>Ngừng hoạt động</label>
                 </div>
             </div>
-            <div class="row mt-2">
-                <div class="col-6">
-                    <label>Trạng thái</label>
-                    <div class="col-12">
-                        <input type="radio" name="trangThai" class="form-check-inline" value="1"
-                        ${trangThai == 1 ? "checked" : ""}/>
-                        <label>Đang hoạt động</label>
-                        <input type="radio" name="trangThai" class="form-check-inline" value="0"
-                        ${trangThai == 0 ? "checked" : ""}/>
-                        <label>Ngừng hoạt động</label>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-2 text-center">
-                <button class="btn btn-primary">Tìm kiếm</button>
-                <a href="/mau-sac/index" class="btn btn-light">Làm mới</a>
-            </div>
-        </form>
+        </div>
+        <div class="mt-2 text-center">
+            <button class="btn btn-primary">Tìm kiếm</button>
+            <a href="/mau-sac/index" class="btn btn-light">Làm mới</a>
+        </div>
+    </form>
 
     <%--
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -88,12 +91,13 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="sp" items="${ data }" >
+        <c:forEach var="sp" items="${ data }">
             <tr>
                 <td>${sp.id}</td>
                 <td>${sp.ma}</td>
                 <td>${sp.ten}</td>
-                <td>${sp.trangThai}</td>
+<%--                <td>${sp.trangThai}</td>--%>
+                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
                     <a href="/mau-sac/edit?id=${sp.id}" class="btn btn-warning">Update</a>
                     <a href="/mau-sac/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
@@ -102,6 +106,21 @@
         </c:forEach>
         </tbody>
     </table>
+
+        <nav aria-label="">
+            <ul class="pagination pagination-md">
+                <c:forEach begin="1" end="${ totalPage }" var="page">
+                    <c:if test="${ page < 4 || page > totalPage - 3 }">
+                        <li class="page-item"><a class="page-link" href="/mau-sac/index?page=${page}">${page}</a></li>
+                    </c:if>
+
+                    <c:if test="${ totalPage > 6 && page == 4 }">
+                        <li class="page-item"><span class="page-link" href="">...</span></li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </nav>
+
 </div>
 
 </body>

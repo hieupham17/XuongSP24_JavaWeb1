@@ -31,7 +31,7 @@
                 <td>${sp.ma}</td>
                 <td>${sp.tenDangNhap}</td>
                 <td>${sp.matkhau}</td>
-                <td>${sp.trangThai}</td>
+                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
                     <a href="/nhan-vien/edit?id=${sp.id}" class="btn btn-warning">Update</a>
                     <a href="/nhan-vien/delete?id=${sp.id}" class="btn btn-danger">Delete</a>

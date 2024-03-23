@@ -29,7 +29,7 @@
                 <td>${sp.ma}</td>
                 <td>${sp.ten}</td>
                 <td>${sp.sdt}</td>
-                <td>${sp.trangThai}</td>
+                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
                     <a href="/khach-hang/edit?id=${sp.id}" class="btn btn-warning">Update</a>
                     <a href="/khach-hang/delete?id=${sp.id}" class="btn btn-danger">Delete</a>

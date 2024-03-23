@@ -33,7 +33,7 @@
                 <td>${sp.id}</td>
                 <td>${sp.ma}</td>
                 <td>${sp.ten}</td>
-                <td>${sp.trangThai}</td>
+                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
                     <a href="/san-pham/edit?id=${sp.id}" class="btn btn-warning">Update</a>
                     <a href="/san-pham/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
