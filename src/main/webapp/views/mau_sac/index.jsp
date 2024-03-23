@@ -16,6 +16,38 @@
 </head>
 <body>
 <div class="container-sm">
+
+        <form action="/mau-sac/index" method="GET">
+            <div class="row mt-2">
+                <div class="col-6">
+                    <label>Mã</label>
+                    <input type="text" name="ma" class="form-control" value="${ma}"/>
+                </div>
+                <div class="col-6">
+                    <label>Tên</label>
+                    <input type="text" name="ten" class="form-control" value="${ten}"/>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <label>Trạng thái</label>
+                    <div class="col-12">
+                        <input type="radio" name="trangThai" class="form-check-inline" value="1"
+                        ${trangThai == 1 ? "checked" : ""}/>
+                        <label>Đang hoạt động</label>
+                        <input type="radio" name="trangThai" class="form-check-inline" value="0"
+                        ${trangThai == 0 ? "checked" : ""}/>
+                        <label>Ngừng hoạt động</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 text-center">
+                <button class="btn btn-primary">Tìm kiếm</button>
+                <a href="/mau-sac/index" class="btn btn-light">Làm mới</a>
+            </div>
+        </form>
+
+    <%--
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -43,6 +75,7 @@
             </div>
         </div>
     </nav>
+  --%>
     <a href="/mau-sac/create" class=" btn btn-success my-2">Thêm mới</a>
     <table class="table table-striped">
         <thead>
@@ -55,15 +88,15 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="ms" items="${ data }" >
+        <c:forEach var="sp" items="${ data }" >
             <tr>
-                <td>${ms.id}</td>
-                <td>${ms.ma}</td>
-                <td>${ms.ten}</td>
-                <td>${ms.trangThai}</td>
+                <td>${sp.id}</td>
+                <td>${sp.ma}</td>
+                <td>${sp.ten}</td>
+                <td>${sp.trangThai}</td>
                 <td>
-                    <a href="/mau-sac/edit?id=${ms.id}" class="btn btn-warning">Update</a>
-                    <a href="/mau-sac/delete?id=${ms.id}" class="btn btn-danger">Delete</a>
+                    <a href="/mau-sac/edit?id=${sp.id}" class="btn btn-warning">Update</a>
+                    <a href="/mau-sac/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </c:forEach>

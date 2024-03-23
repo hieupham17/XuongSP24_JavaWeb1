@@ -13,4 +13,11 @@
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="XuongSP24_JavaWeb1" />
+      </set>
+    </option>
+  </component>
 </project>
