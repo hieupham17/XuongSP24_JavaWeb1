@@ -91,23 +91,23 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="sp" items="${ data }">
+        <c:forEach var="spct" items="${ data }">
             <tr>
-                <td>${sp.id}</td>
-                <td>${sp.ma}</td>
-                <td>${sp.ten}</td>
+                <td>${spct.id}</td>
+                <td>${spct.ma}</td>
+                <td>${spct.ten}</td>
 <%--                <td>${sp.trangThai}</td>--%>
-                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
+                <td>${spct.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
-                    <a href="/mau-sac/edit?id=${sp.id}" class="btn btn-warning">Update</a>
-                    <a href="/mau-sac/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
+                    <a href="/mau-sac/edit?id=${spct.id}" class="btn btn-warning">Update</a>
+                    <a href="/mau-sac/delete?id=${spct.id}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 
-        <nav aria-label="">
+        <nav aria-label="" class="d-flex flex-row-reverse" >
             <ul class="pagination pagination-md">
                 <c:forEach begin="1" end="${ totalPage }" var="page">
                     <c:if test="${ page < 4 || page > totalPage - 3 }">
@@ -119,6 +119,17 @@
                     </c:if>
                 </c:forEach>
             </ul>
+<%--            <div class="dropdown">--%>
+<%--                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                    Dropdown link--%>
+<%--                </a>--%>
+
+<%--                <ul class="dropdown-menu">--%>
+<%--                    <li><a class="dropdown-item" href="#">30</a></li>--%>
+<%--                    <li><a class="dropdown-item" href="#">50</a></li>--%>
+<%--                    <li><a class="dropdown-item" href="#">70</a></li>--%>
+<%--                </ul>--%>
+<%--            </div>--%>
         </nav>
 
 </div>

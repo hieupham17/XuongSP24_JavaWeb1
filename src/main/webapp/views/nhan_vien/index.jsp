@@ -24,17 +24,17 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="sp" items="${ data }" >
+        <c:forEach var="spct" items="${ data }" >
             <tr>
-                <td>${sp.id}</td>
-                <td>${sp.ten}</td>
-                <td>${sp.ma}</td>
-                <td>${sp.tenDangNhap}</td>
-                <td>${sp.matkhau}</td>
-                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
+                <td>${spct.id}</td>
+                <td>${spct.ten}</td>
+                <td>${spct.ma}</td>
+                <td>${spct.tenDangNhap}</td>
+                <td>${spct.matkhau}</td>
+                <td>${spct.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
-                    <a href="/nhan-vien/edit?id=${sp.id}" class="btn btn-warning">Update</a>
-                    <a href="/nhan-vien/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
+                    <a href="/nhan-vien/edit?id=${spct.id}" class="btn btn-warning">Update</a>
+                    <a href="/nhan-vien/delete?id=${spct.id}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </c:forEach>

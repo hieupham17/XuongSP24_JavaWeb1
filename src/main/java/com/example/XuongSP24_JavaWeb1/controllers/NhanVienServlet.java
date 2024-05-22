@@ -1,7 +1,7 @@
 package com.example.XuongSP24_JavaWeb1.controllers;
 
 import com.example.XuongSP24_JavaWeb1.entities.NhanVien;
-import com.example.XuongSP24_JavaWeb1.repositories.NhanVienRepository;
+import com.example.XuongSP24_JavaWeb1.repositories.jdbc.NhanVienRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

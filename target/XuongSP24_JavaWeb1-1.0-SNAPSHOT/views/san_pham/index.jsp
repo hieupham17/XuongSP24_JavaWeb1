@@ -21,22 +21,23 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Mã sản phẩm</th>
             <th>Tên sản phẩm</th>
+            <th>Mã sản phẩm</th>
             <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="sp" items="${ data }" >
+        <c:forEach var="spct" items="${ data }" >
             <tr>
-                <td>${sp.id}</td>
-                <td>${sp.ma}</td>
-                <td>${sp.ten}</td>
-                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
+                <td>${spct.id}</td>
+                <td>${spct.ma}</td>
+                <td>${spct.ten}</td>
+                <td>${spct.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
-                    <a href="/san-pham/edit?id=${sp.id}" class="btn btn-warning">Update</a>
-                    <a href="/san-pham/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
+                    <a href="/san-pham/edit?id=${spct.id}" class="btn btn-warning">Update</a>
+<%--                    <a href="/san-pham/delete?id=${spct.id}" class="btn btn-primary">Detail</a>--%>
+                    <a href="/sp-chi-tiet/index?san_pham_id=${spct.id}" class="btn btn-primary">Detail</a>
                 </td>
             </tr>
         </c:forEach>

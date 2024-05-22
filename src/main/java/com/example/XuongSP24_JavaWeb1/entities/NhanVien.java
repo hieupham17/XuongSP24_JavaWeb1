@@ -1,70 +1,37 @@
 package com.example.XuongSP24_JavaWeb1.entities;
 
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "NhanVien")
 public class NhanVien {
+
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id;
+
+    @Column(name = "Ten")
     private String ten;
+
+    @Column(name = "Ma")
     private String ma;
+
+    @Column(name = "TenDangNhap")
     private String tenDangNhap;
+
+    @Column(name = "MatKhau")
     private String matkhau;
+
+    @Column(name = "TrangThai")
     private int trangThai;
-
-    public NhanVien() {
-    }
-
-    public NhanVien(int id, String ten, String ma, String tenDangNhap, String matkhau, int trangThai) {
-        this.id = id;
-        this.ten = ten;
-        this.ma = ma;
-        this.tenDangNhap = tenDangNhap;
-        this.matkhau = matkhau;
-        this.trangThai = trangThai;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
-    public String getTenDangNhap() {
-        return tenDangNhap;
-    }
-
-    public void setTenDangNhap(String tenDangNhap) {
-        this.tenDangNhap = tenDangNhap;
-    }
-
-    public String getMatkhau() {
-        return matkhau;
-    }
-
-    public void setMatkhau(String matkhau) {
-        this.matkhau = matkhau;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
 }

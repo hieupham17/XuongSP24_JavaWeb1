@@ -17,17 +17,17 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active text-black" aria-current="page" href="#">Bán hàng</a>
-                        <a class="nav-link text-black" href="/san-pham/index">Quản lý sản phẩm</a>
+                        <a class="nav-link text-black" href="#">Quản lý sản phẩm</a>
                         <a class="nav-link text-black" href="#">Quản lý hoá đơn</a>
-                        <a class="nav-link text-black" href="/nhan-vien/index">Quản lý nhân viên</a>
-                        <a class="nav-link text-black" href="/khach-hang/index">Quản lý khách hàng</a>
+                        <a class="nav-link text-black" href="#">Quản lý nhân viên</a>
+                        <a class="nav-link text-black" href="#">Quản lý khách hàng</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Quản lý thuộc tính
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-black" href="mau-sac/index">Màu sắc</a></li>
-                                <li><a class="dropdown-item text-black" href="kich-thuoc/index">Kích thước</a></li>
+                                <li><a class="dropdown-item text-black" href="#">Màu sắc</a></li>
+                                <li><a class="dropdown-item text-black" href="#">Kích thước</a></li>
                             </ul>
                         </li>
 

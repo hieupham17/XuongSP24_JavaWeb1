@@ -1,60 +1,33 @@
 package com.example.XuongSP24_JavaWeb1.entities;
 
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "KhachHang")
 public class KhachHang {
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private int id ;
+
+    @Column(name = "Ma")
     private String ma;
+
+    @Column(name = "Ten")
     private  String ten ;
+
+    @Column(name = "SDT")
     private String sdt ;
+
+    @Column(name = "TrangThai")
     private int trangThai ;
-
-    public KhachHang() {
-    }
-
-    public KhachHang(int id, String ma, String ten, String sdt, int trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.sdt = sdt;
-        this.trangThai = trangThai;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getMa() {
-        return ma;
-    }
-
-    public void setMa(String ma) {
-        this.ma = ma;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public String getSdt() {
-        return sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
 }

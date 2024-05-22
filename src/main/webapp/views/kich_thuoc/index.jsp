@@ -28,20 +28,33 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="sp" items="${ data }" >
+        <c:forEach var="spct" items="${ data }" >
             <tr>
-                <td>${sp.id}</td>
-                <td>${sp.ma}</td>
-                <td>${sp.ten}</td>
-                <td>${sp.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
+                <td>${spct.id}</td>
+                <td>${spct.ma}</td>
+                <td>${spct.ten}</td>
+                <td>${spct.trangThai == 1 ? "Đang hoạt động" : "Ngừng hoạt động"}</td>
                 <td>
-                    <a href="/kich-thuoc/edit?id=${sp.id}" class="btn btn-warning">Update</a>
-                    <a href="/kich-thuoc/delete?id=${sp.id}" class="btn btn-danger">Delete</a>
+                    <a href="/kich-thuoc/edit?id=${spct.id}" class="btn btn-warning">Update</a>
+                    <a href="/kich-thuoc/delete?id=${spct.id}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <nav class="d-flex flex-row-reverse">
+        <ul class="pagination pagination-md">
+            <c:forEach begin="1" end="${ totalPage }" var="page">
+                <c:if test="${ page < 4 || page > totalPage - 3 }">
+                    <li class="page-item"><a class="page-link" href="/kich-thuoc/index?page=${page}">${page}</a></li>
+                </c:if>
+
+                <c:if test="${ totalPage > 6 && page == 4 }">
+                    <li class="page-item"><span class="page-link" href="">...</span></li>
+                </c:if>
+            </c:forEach>
+        </ul>
+    </nav>
 </div>
 
 </body>

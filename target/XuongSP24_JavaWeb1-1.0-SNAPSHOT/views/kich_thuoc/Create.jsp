@@ -14,7 +14,7 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
 
-    <title>Title</title>
+    <title>Add kích thước</title>
 </head>
 <body>
 <div class="container-sm">
@@ -32,7 +32,7 @@
 
         <div class="form-group my-2">
             <label class="form-check-label">Trạng thái</label>
-            <input class="form-check-input" type="radio" name="trangThai" value="1"/>Đang hoạt động
+            <input class="form-check-input" type="radio" name="trangThai" value="1" checked />Đang hoạt động
             <input class="form-check-input" type="radio" name="trangThai" value="0"/>Ngừng hoạt động
         </div>
         <div class="my-2">

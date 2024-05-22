@@ -1,9 +1,7 @@
 package com.example.XuongSP24_JavaWeb1.controllers;
 
-import com.example.XuongSP24_JavaWeb1.entities.KichThuoc;
 import com.example.XuongSP24_JavaWeb1.entities.SanPham;
-import com.example.XuongSP24_JavaWeb1.repositories.KichThuocRepository;
-import com.example.XuongSP24_JavaWeb1.repositories.SanPhamRepository;
+import com.example.XuongSP24_JavaWeb1.repositories.jdbc.SanPhamRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -94,7 +92,7 @@ public class SanPhamServlet extends HttpServlet {
         String ma = request.getParameter("ma");
         String ten = request.getParameter("ten");
         int trangthai = Integer.parseInt(request.getParameter("trangThai")) ;
-        SanPham sp =  new SanPham ( ma, ten, trangthai);
+        SanPham sp =  new SanPham (null , ma, ten, trangthai);
         this.spRepo.insert(sp);
         response.sendRedirect("/san-pham/index");
     }
